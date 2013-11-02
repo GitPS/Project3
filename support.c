@@ -57,7 +57,7 @@ int parse_command_line_arguments(int argc, char *argv[], char *filename, algorit
                 i++;
             }
         }
-        /* Treat everything else as a filename */
+        /* Treat everything else as a filename, but only assign 1 filename. */
         else if(filename_found != 0){
             strcpy(filename, argv[i]);
             filename_found = 0;
