@@ -14,7 +14,11 @@
 /* Structures */
 
 /*
- * CPU scheduling algorithms
+ * CPU scheduling algorithms:
+ *   FCFS - First Come, First Served
+ *   SJF - Shortest-Job First
+ *   PRIORITY - Priority
+ *   RR - Round-Robin
  */
 enum algorithm{
     FCFS,
