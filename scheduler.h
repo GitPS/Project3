@@ -13,32 +13,12 @@
 
 /* Structures */
 
-/*
- * CPU scheduling algorithms:
- *   FCFS - First Come, First Served
- *   SJF - Shortest-Job First
- *   PRIORITY - Priority
- *   RR - Round-Robin
- */
-enum algorithm{
-    FCFS,
-    SJF,
-    PRIORITY,
-    RR
-};
-typedef enum algorithm algorithm;
-
-/*
- * Structure to hold CPU job and scheduling information.
- */
-struct cpu_process{
-    int indetifier;
-    int burst_length;
-    int priority;
-};
-typedef struct cpu_process cpu_process;
-
 /* Global Variables */
+
+ /*
+ * Max length of the filename
+ */
+int MAXFILENAME = 256;
 
 /* Function Declarations */
 

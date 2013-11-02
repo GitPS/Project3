@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 /* Defines */
 
@@ -20,8 +21,45 @@
 
 /* Structures */
 
+/*
+ * CPU scheduling algorithms:
+ *   FCFS - First Come, First Served
+ *   SJF - Shortest-Job First
+ *   PRIORITY - Priority
+ *   RR - Round-Robin
+ *   NONE - No algorithm assigned 
+ */
+enum algorithm_type{
+    FCFS,
+    SJF,
+    PRIORITY,
+    RR,
+    NONE
+};
+typedef enum algorithm_type algorithm_type;
+
+/*
+ * Structure to hold CPU job and scheduling information.
+ */
+struct cpu_process{
+    int indetifier;
+    int burst_length;
+    int priority;
+};
+typedef struct cpu_process cpu_process;
+
 /* Global Variables */
 
 /* Function Declartions */
+
+/*
+ * Parses the command line arguments to determine the file name to read from, the algorithm
+ * type, and the quantum (if applicable).
+ *   file_name : Name of the file to read data from.
+ *   algorithm : The algorithm that the CPU scheduler will use.
+ *   quantum : The quantum to use if Round-Robin is chosen.  Otherwise 0.
+ * Return 0 on success, -1 otherwise.
+ */
+int parse_command_line_arguments(int argc, char *argv[], char *filename, algorithm_type *algorithm, int *quantum);
 
 #endif
