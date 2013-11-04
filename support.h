@@ -78,8 +78,8 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
  *   str : String to check
  *
  * Returns:
- *  0 if it is not a valid integer.
- *  1 if it is a valid integer.
+ *  0 if it is a valid integer.
+ *  -1 if it is not a valid integer.
  *
  */
 int is_valid_int(char *str);
