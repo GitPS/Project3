@@ -20,7 +20,7 @@ int parse_command_line_arguments(int argc, char *argv[], char *filename, algorit
             /* Check to see if there is another argument and assign that value to algorithm_type */
             if(i + 1 < argc){
                 /* Check for valid integer before we call strtol()*/
-                if(is_valid_int(argv[i + 1]) == 1){
+                if(is_valid_int(argv[i + 1]) != 0){
                     return -1;
                 }
                int algorithm_identifier = strtol(argv[i + 1], NULL, 10);
@@ -106,12 +106,21 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
         fgets_rtn = fgets(buffer, 1024, fd);
         
         if( NULL == fgets_rtn) {
-            break;
+            continue;
+        }
+        
+        /* Strip off the new line */
+        if( '\n' == buffer[ strlen(buffer) - 1] ) {
+            buffer[ strlen(buffer) - 1] = '\0';
         }
         
         /* If this is the first line in the file it contains the process count */
         if(i == -1){
             str_ptr = strtok(buffer, " ");
+            /* Check for valid integer before we call strtol()*/
+            if(is_valid_int(str_ptr) != 0){
+                return -1;
+            }
             *num_processes = strtol(str_ptr, NULL, 10);
             /* Add correct amount of space in the processes array */
             (*processes) = (cpu_process *)realloc((*processes), (sizeof(cpu_process) * (*num_processes)));
@@ -129,21 +138,21 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
                 switch(j){
                     case 0:
                         /* Check for valid integer before we call strtol()*/
-                        if(is_valid_int(str_ptr) == 1){
+                        if(is_valid_int(str_ptr) != 0){
                             return -1;
                         }
                         (*processes)[i].indetifier = strtol(str_ptr, NULL, 10);
                         break;
                     case 1:
                         /* Check for valid integer before we call strtol()*/
-                        if(is_valid_int(str_ptr) == 1){
+                        if(is_valid_int(str_ptr) != 0){
                             return -1;
                         }
                         (*processes)[i].burst_length = strtol(str_ptr, NULL, 10);
                         break;
                     case 2:
                         /* Check for valid integer before we call strtol()*/
-                        if(is_valid_int(str_ptr) == 1){
+                        if(is_valid_int(str_ptr) != 0){
                             return -1;
                         }
                         (*processes)[i].priority = strtol(str_ptr, NULL, 10);
@@ -160,10 +169,11 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
 }
 
 int is_valid_int(char *str){
+    printf("String to check: %s\n", str);
     int length = strlen(str);
     int i = 0;
 
-    // Check for leading spaces.
+    /* Check for leading spaces */
     if(isspace(str[0])){
         i = 1;
         while(isspace(str[i])){
@@ -171,19 +181,14 @@ int is_valid_int(char *str){
         }
     }
 
-    // Check for leading + or - signs.
-    if(str[i] == '+' || str[i] == '-'){
-            i++;
-    }
-
-    // At this point we have verified that the only remaning characters should be digits if this is an integer.
+    /* At this point we have verified that the only remaning characters should be digits if this is an integer. */
     for(i = i; i < length; i++){
         if(!isdigit(str[i])){
-            // Is not an integer.
+            /* Is not an integer */
             return -1;          
         }
     }   
-    // Is an integer.
+    /* Is an integer */
     return 0;
 }
 
