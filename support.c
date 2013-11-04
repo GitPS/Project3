@@ -19,6 +19,10 @@ int parse_command_line_arguments(int argc, char *argv[], char *filename, algorit
         if(strncmp("-s", argv[i], strlen("-s")) == 0){
             /* Check to see if there is another argument and assign that value to algorithm_type */
             if(i + 1 < argc){
+                /* Check for valid integer before we call strtol()*/
+                if(is_valid_int(argv[i + 1]) == 1){
+                    return -1;
+                }
                int algorithm_identifier = strtol(argv[i + 1], NULL, 10);
                // TODO Error handling for non-integer char.
                switch(algorithm_identifier){
@@ -122,16 +126,27 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
             for( str_ptr = strtok(buffer, " ");
                 NULL   != str_ptr && *str_ptr != '\n';
                 str_ptr = strtok(NULL, " ") ) {
-                int temp = strtol(str_ptr, NULL, 10);
                 switch(j){
                     case 0:
-                        (*processes)[i].indetifier = temp;
+                        /* Check for valid integer before we call strtol()*/
+                        if(is_valid_int(str_ptr) == 1){
+                            return -1;
+                        }
+                        (*processes)[i].indetifier = strtol(str_ptr, NULL, 10);
                         break;
                     case 1:
-                        (*processes)[i].burst_length = temp;
+                        /* Check for valid integer before we call strtol()*/
+                        if(is_valid_int(str_ptr) == 1){
+                            return -1;
+                        }
+                        (*processes)[i].burst_length = strtol(str_ptr, NULL, 10);
                         break;
                     case 2:
-                        (*processes)[i].priority = temp;
+                        /* Check for valid integer before we call strtol()*/
+                        if(is_valid_int(str_ptr) == 1){
+                            return -1;
+                        }
+                        (*processes)[i].priority = strtol(str_ptr, NULL, 10);
                         break;
                     default:
                         break;
