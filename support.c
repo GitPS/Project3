@@ -169,7 +169,6 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
 }
 
 int is_valid_int(char *str){
-    printf("String to check: %s\n", str);
     int length = strlen(str);
     int i = 0;
 
