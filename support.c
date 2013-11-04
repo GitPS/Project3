@@ -82,3 +82,67 @@ int parse_command_line_arguments(int argc, char *argv[], char *filename, algorit
     
     return 0;
 }
+
+int parse_file_into_processes(char *filename, int *num_processes, cpu_process **processes){
+    FILE *fd = NULL;
+    char buffer[1024];
+    char *fgets_rtn = NULL;
+    
+    /* Open File */
+    fd = fopen(filename, "r");
+    if(NULL == fd){
+        fprintf(stderr, "Error: Cannot open the file %s for reading!\n", filename);
+        return -1;
+    }
+    
+    /* Read File */
+    int process_count = -2;
+    int i = -1;
+    while(0 == feof(fd) && i != process_count){
+        char * str_ptr  = NULL;
+        fgets_rtn = fgets(buffer, 1024, fd);
+        
+        if( NULL == fgets_rtn) {
+            break;
+        }
+        
+        /* If this is the first line in the file it contains the process count */
+        if(process_count == -1){
+            str_ptr = strtok(buffer, " ");
+            process_count = strtol(str_ptr, NULL, 10);
+        }    
+        else{
+            int j = 0;
+            for( str_ptr = strtok(buffer, " ");
+                NULL   != str_ptr && *str_ptr != '\n';
+                str_ptr = strtok(NULL, " ") ) {
+                int temp = strtol(str_ptr, NULL, 10);
+                switch(j){
+                    case 0:
+                        (*processes)[i].indetifier = temp;
+                        break;
+                    case 1:
+                        (*processes)[i].burst_length = temp;
+                        break;
+                    case 2:
+                        (*processes)[i].priority = temp;
+                        break;
+                    default:
+                        break;
+                }
+                j++;
+            }
+            /* Add more space in the processes array */
+            (*processes) = (cpu_process *)realloc((*processes), (sizeof(cpu_process) * ((*num_processes) + 1)));
+            (*num_processes)++;
+            if( NULL == (*processes) ) {
+                fprintf(stderr, "Error: Failed to allocate memory! Critical failure on %d!", __LINE__);
+                exit(-1);
+            }
+        }
+        i++;
+    }
+    return 0;
+}
+
+

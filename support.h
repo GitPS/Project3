@@ -62,4 +62,13 @@ typedef struct cpu_process cpu_process;
  */
 int parse_command_line_arguments(int argc, char *argv[], char *filename, algorithm_type *algorithm, int *quantum);
 
+/*
+ * Parses the provided file to create an array of processes.
+ *   file_name : Name of the file to read data from.
+ *   num_processes : Size of processes array.
+ *   processes : Array of processes.
+ * Return 0 on success, -1 otherwise.
+ */
+int parse_file_into_processes(char *filename, int *num_processes, cpu_process **processes); 
+
 #endif
