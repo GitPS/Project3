@@ -96,9 +96,8 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
     }
     
     /* Read File */
-    int process_count = -2;
     int i = -1;
-    while(0 == feof(fd) && i != process_count){
+    while(0 == feof(fd) && i != *num_processes){
         char * str_ptr  = NULL;
         fgets_rtn = fgets(buffer, 1024, fd);
         
@@ -107,10 +106,17 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
         }
         
         /* If this is the first line in the file it contains the process count */
-        if(process_count == -1){
+        if(i == -1){
             str_ptr = strtok(buffer, " ");
-            process_count = strtol(str_ptr, NULL, 10);
+            *num_processes = strtol(str_ptr, NULL, 10);
+            /* Add correct amount of space in the processes array */
+            (*processes) = (cpu_process *)realloc((*processes), (sizeof(cpu_process) * (*num_processes)));
+            if( NULL == (*processes) ) {
+                fprintf(stderr, "Error: Failed to allocate memory! Critical failure on %d!", __LINE__);
+                exit(-1);
+            }
         }    
+        /* All other lines should be treated as a process */
         else{
             int j = 0;
             for( str_ptr = strtok(buffer, " ");
@@ -131,13 +137,6 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
                         break;
                 }
                 j++;
-            }
-            /* Add more space in the processes array */
-            (*processes) = (cpu_process *)realloc((*processes), (sizeof(cpu_process) * ((*num_processes) + 1)));
-            (*num_processes)++;
-            if( NULL == (*processes) ) {
-                fprintf(stderr, "Error: Failed to allocate memory! Critical failure on %d!", __LINE__);
-                exit(-1);
             }
         }
         i++;
