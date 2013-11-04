@@ -24,7 +24,6 @@ int parse_command_line_arguments(int argc, char *argv[], char *filename, algorit
                     return -1;
                 }
                int algorithm_identifier = strtol(argv[i + 1], NULL, 10);
-               // TODO Error handling for non-integer char.
                switch(algorithm_identifier){
                    case 1:
                        *algorithm = FCFS;
@@ -54,8 +53,11 @@ int parse_command_line_arguments(int argc, char *argv[], char *filename, algorit
         else if(strncmp("-q", argv[i], strlen("-q")) == 0){
             /* Check to see if there is another argument and assign that value to quantum */
             if(i + 1 < argc){
+                /* Check for valid integer before we call strtol()*/
+                if(is_valid_int(argv[i + 1]) != 0){
+                    return -1;
+                }
                 *quantum = strtol(argv[i + 1], NULL, 10);
-                // TODO Error handling for non-integer char.
                 quantum_found = 0;
                 /* Skip the next argument since we just used it */
                 i++;
