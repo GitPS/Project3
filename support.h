@@ -71,4 +71,16 @@ int parse_command_line_arguments(int argc, char *argv[], char *filename, algorit
  */
 int parse_file_into_processes(char *filename, int *num_processes, cpu_process **processes); 
 
+/*
+ * Takes an input string to check if it is a syntaticaly correct integer.
+ *
+ * Paramters:
+ *   str : String to check
+ *
+ * Returns:
+ *  0 if it is not a valid integer.
+ *  1 if it is a valid integer.
+ *
+ */
+int is_valid_int(char *str);
 #endif

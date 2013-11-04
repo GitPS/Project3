@@ -31,7 +31,11 @@ int main(int argc, char * argv[]) {
     }
     
     /* Parse input file */
-    ret = parse_file_into_processes(filename, &num_processes, &processes);   
+    ret = parse_file_into_processes(filename, &num_processes, &processes);
+    if(ret == -1){
+        fprintf(stderr, "Error: There was a problem with the input file %s!\n", filename);
+        exit(-1);
+    }
     
     /* DEBUG START */
     
