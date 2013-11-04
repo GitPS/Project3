@@ -106,7 +106,7 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
         fgets_rtn = fgets(buffer, 1024, fd);
         
         if( NULL == fgets_rtn) {
-            continue;
+            break;
         }
         
         /* Strip off the new line */
