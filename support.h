@@ -42,7 +42,7 @@ typedef enum algorithm_type algorithm_type;
  * Structure to hold CPU job and scheduling information.
  */
 struct cpu_process{
-    int indetifier;
+    int identifier;
     int burst_length;
     int priority;
 };

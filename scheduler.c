@@ -61,8 +61,21 @@ int main(int argc, char * argv[]) {
             break;
     }
     
-    /* Debug information */
-    //print_debug(num_processes, &processes, algorithm, quantum, filename);
+    /* Cleanup */
+    int i;
+    if(processes != NULL){
+        /* Cleanup fields */
+        for(i = 0; i < num_processes; i++){
+            /* .identifier */
+            processes->identifier = 0;            
+            /* .burst_length */
+            processes->burst_length = 0;            
+            /* .priority */
+            processes->priority = 0;            
+        }
+        free(processes);
+        processes = NULL;
+    }
     
     return 0;
 }
@@ -97,14 +110,14 @@ int print_process_information(int num_processes, cpu_process **processes){
     /* Arrival order */
     printf("Arrival Order: ");
     for(i = 0; i < num_processes - 1; i++){
-        printf("%d, ", (*processes)[i].indetifier);        
+        printf("%d, ", (*processes)[i].identifier);        
     }
-    printf("%d\n", (*processes)[i].indetifier);
+    printf("%d\n", (*processes)[i].identifier);
     
     /* Process information */
     printf("Process Information: \n");
     for(i = 0; i < num_processes; i++){
-        printf("%*d      ", 2, (*processes)[i].indetifier);
+        printf("%*d      ", 2, (*processes)[i].identifier);
         printf("%*d      ", 2, (*processes)[i].burst_length);
         printf("%*d\n", 2, (*processes)[i].priority);
     }
@@ -127,7 +140,7 @@ int simulate_fcfs(int num_processes, cpu_process **processes){
     for(i = 0; i < num_processes; i++){
         wait_time = turnaround_time;
         turnaround_time += (*processes)[i].burst_length;
-        printf("%*d      ", 2, (*processes)[i].indetifier);
+        printf("%*d      ", 2, (*processes)[i].identifier);
         printf("%*d      ", 2, (*processes)[i].burst_length);
         printf("%*d      ", 2, (*processes)[i].priority);
         printf("%*d      ", 2, wait_time);
@@ -154,38 +167,5 @@ int simulate_priority(int num_processes, cpu_process **processes){
 
 int simulate_rr(int num_processes, cpu_process **processes, int quantum){
     
-    return 0;
-}
-
-
-int print_debug(int num_processes, cpu_process **processes, algorithm_type algorithm, int quantum, char *filename){
-    int i;
-    for(i = 0; i < num_processes; i++){
-        printf("----- PROCESS %d INFORMATION -----\n", (i + 1));
-        printf("Identifier: %d\n", (*processes)[i].indetifier);
-        printf("Burst Length: %d\n", (*processes)[i].burst_length);
-        printf("Priority: %d\n", (*processes)[i].priority);
-        printf("----- END INFORMATION -----\n\n");    
-    }
-    
-    switch(algorithm){
-        case FCFS:
-            printf("Algorithm : FCFS\n");
-            break;
-        case SJF:
-            printf("Algorithm : SJF\n");
-            break;
-        case PRIORITY:
-            printf("Algorithm : PRIORITY\n");
-            break;
-        case RR:
-            printf("Algorithm : RR\n");
-            break;
-        default:
-            printf("This shouldn't happen :(\n");
-            break;
-    }
-    printf("Quantum : %d\n", quantum);
-    printf("File : %s\n", filename);
     return 0;
 }

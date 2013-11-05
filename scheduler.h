@@ -73,9 +73,4 @@ int simulate_priority(int num_processes, cpu_process **processes);
  */
 int simulate_rr(int num_processes, cpu_process **processes, int quantum);
 
-/*
- * Print debuf information.
- */
-int print_debug(int num_processes, cpu_process **processes, algorithm_type algorithm, int quantum, char *filename);
-
 #endif

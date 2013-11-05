@@ -143,7 +143,7 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
                         if(is_valid_int(str_ptr) != 0){
                             return -1;
                         }
-                        (*processes)[i].indetifier = strtol(str_ptr, NULL, 10);
+                        (*processes)[i].identifier = strtol(str_ptr, NULL, 10);
                         break;
                     case 1:
                         /* Check for valid integer before we call strtol()*/
