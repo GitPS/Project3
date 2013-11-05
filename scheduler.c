@@ -37,11 +37,69 @@ int main(int argc, char * argv[]) {
         exit(-1);
     }
     
+    /* Print pre-processing information */
+    print_pre_process_information(algorithm, quantum, filename);
+    
+    /* Print process information */
+    print_process_information(num_processes, &processes);
+    
     /* Debug information */
-    print_debug(num_processes, &processes, algorithm, quantum, filename);
+    //print_debug(num_processes, &processes, algorithm, quantum, filename);
     
     return 0;
 }
+
+int print_pre_process_information(algorithm_type algorithm, int quantum, char *filename){
+    switch(algorithm){
+        case FCFS:
+            printf("Scheduler    :  1 FCFS\n");
+            break;
+        case SJF:
+            printf("Scheduler    :  2 SJF\n");
+            break;
+        case PRIORITY:
+            printf("Scheduler    :  3 PRIORITY\n");
+            break;
+        case RR:
+            printf("Scheduler    :  4 RR\n");
+            break;
+        case NONE:
+            printf("Scheduler    : None assigned\n");
+            break;
+    }
+    printf("Quantum      : %*d\n", 2, quantum);
+    printf("Sch. File    : %s\n", filename);
+    printf("-------------------------------\n");
+    
+    return 0;
+}
+
+int print_process_information(int num_processes, cpu_process **processes){
+    int i;
+    /* Arrival order */
+    printf("Arrival Order: ");
+    for(i = 0; i < num_processes - 1; i++){
+        printf("%d, ", (*processes)[i].indetifier);        
+    }
+    printf("%d\n", (*processes)[i].indetifier);
+    
+    /* Process information */
+    printf("Process Information: \n");
+    for(i = 0; i < num_processes; i++){
+        printf("%*d      ", 2, (*processes)[i].indetifier);
+        printf("%*d      ", 2, (*processes)[i].burst_length);
+        printf("%*d\n", 2, (*processes)[i].priority);
+    }
+    
+    /* Print running message */
+    printf("-------------------------------\n");
+    printf("Running...\n");
+    printf("-------------------------------\n");
+    
+    return 0;
+}
+
+
 
 int print_debug(int num_processes, cpu_process **processes, algorithm_type algorithm, int quantum, char *filename){
     int i;
