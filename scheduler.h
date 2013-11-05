@@ -22,4 +22,9 @@ int MAXFILENAME = 256;
 
 /* Function Declarations */
 
+/*
+ * Print debuf information.
+ */
+int print_debug(int num_processes, cpu_process **processes, algorithm_type algorithm, int quantum, char *filename);
+
 #endif

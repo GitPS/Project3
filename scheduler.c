@@ -37,14 +37,19 @@ int main(int argc, char * argv[]) {
         exit(-1);
     }
     
-    /* DEBUG START */
+    /* Debug information */
+    print_debug(num_processes, &processes, algorithm, quantum, filename);
     
+    return 0;
+}
+
+int print_debug(int num_processes, cpu_process **processes, algorithm_type algorithm, int quantum, char *filename){
     int i;
     for(i = 0; i < num_processes; i++){
         printf("----- PROCESS %d INFORMATION -----\n", (i + 1));
-        printf("Identifier: %d\n", processes[i].indetifier);
-        printf("Burst Length: %d\n", processes[i].burst_length);
-        printf("Priority: %d\n", processes[i].priority);
+        printf("Identifier: %d\n", (*processes)[i].indetifier);
+        printf("Burst Length: %d\n", (*processes)[i].burst_length);
+        printf("Priority: %d\n", (*processes)[i].priority);
         printf("----- END INFORMATION -----\n\n");    
     }
     
@@ -67,7 +72,5 @@ int main(int argc, char * argv[]) {
     }
     printf("Quantum : %d\n", quantum);
     printf("File : %s\n", filename);
-    /* DEBUG END */
-    
     return 0;
 }
