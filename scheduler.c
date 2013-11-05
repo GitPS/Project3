@@ -43,6 +43,24 @@ int main(int argc, char * argv[]) {
     /* Print process information */
     print_process_information(num_processes, &processes);
     
+    /* Simulate scheduling of selected algorithm */
+    switch(algorithm){
+        case FCFS:
+            simulate_fcfs(num_processes, &processes);           
+            break;
+        case SJF:
+            simulate_sjf(num_processes, &processes);
+            break;
+        case PRIORITY:
+            simulate_priority(num_processes, &processes);
+            break;
+        case RR:
+            simulate_rr(num_processes, &processes, quantum);
+            break;
+        case NONE:
+            break;
+    }
+    
     /* Debug information */
     //print_debug(num_processes, &processes, algorithm, quantum, filename);
     
@@ -99,6 +117,45 @@ int print_process_information(int num_processes, cpu_process **processes){
     return 0;
 }
 
+int simulate_fcfs(int num_processes, cpu_process **processes){
+    int wait_time = 0;
+    int turnaround_time = 0;
+    int total_wait_time = 0;
+    int total_turnaround_time = 0;
+    int i;
+    
+    for(i = 0; i < num_processes; i++){
+        wait_time = turnaround_time;
+        turnaround_time += (*processes)[i].burst_length;
+        printf("%*d      ", 2, (*processes)[i].indetifier);
+        printf("%*d      ", 2, (*processes)[i].burst_length);
+        printf("%*d      ", 2, (*processes)[i].priority);
+        printf("%*d      ", 2, wait_time);
+        printf("%*d      \n", 2, turnaround_time);
+        /* Increment totals for averages */
+        total_wait_time += wait_time;
+        total_turnaround_time += turnaround_time;
+    }
+    printf("Avg. Waiting Time    : %*.02lf\n", 2, ((double)total_wait_time / num_processes));
+    printf("Avg. Turnaround Time : %*.02lf\n", 2, ((double)total_turnaround_time / num_processes));
+    printf("-------------------------------\n");
+    return 0;
+}
+
+int simulate_sjf(int num_processes, cpu_process **processes){
+    
+    return 0;
+}
+
+int simulate_priority(int num_processes, cpu_process **processes){
+    
+    return 0;
+}
+
+int simulate_rr(int num_processes, cpu_process **processes, int quantum){
+    
+    return 0;
+}
 
 
 int print_debug(int num_processes, cpu_process **processes, algorithm_type algorithm, int quantum, char *filename){
