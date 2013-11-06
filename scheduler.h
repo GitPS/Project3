@@ -29,30 +29,27 @@ int MAXFILENAME = 256;
  *   filename : File that data was read from
  * Returns 0 on success
  */
-int print_pre_process_information(algorithm_type algorithm, int quantum, char *filename);
+void print_pre_process_information(algorithm_type algorithm, int quantum, char *filename);
 
 /*
  * Print process information including arrival order, process identifier, 
  * CPU burst length, and priority.
  *   num_processes : Number of processes that were read in from file
  *   processes : Array containing the CPU processes 
- * Returns 0 on success
  */
-int print_process_information(int num_processes, cpu_process **processes);
+void print_process_information(int num_processes, cpu_process **processes);
 
 /*
  * Simulates the use of a First Come, First Served scheduling algorithm.
  *   num_processes : Number of processes that were read in from file
  *   processes : Array containing the CPU processes 
- * Returns 0 on success
  */
-int simulate_fcfs(int num_processes, cpu_process **processes);
+void simulate_fcfs(int num_processes, cpu_process **processes);
 
 /*
  * Simulates the use of a Shortest Job First scheduling algorithm.
  *   num_processes : Number of processes that were read in from file
  *   processes : Array containing the CPU processes 
- * Returns 0 on success
  */
 int simulate_sjf(int num_processes, cpu_process **processes);
 

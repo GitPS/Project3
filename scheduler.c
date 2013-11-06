@@ -80,7 +80,7 @@ int main(int argc, char * argv[]) {
     return 0;
 }
 
-int print_pre_process_information(algorithm_type algorithm, int quantum, char *filename){
+void print_pre_process_information(algorithm_type algorithm, int quantum, char *filename){
     switch(algorithm){
         case FCFS:
             printf("Scheduler    :  1 FCFS\n");
@@ -101,11 +101,9 @@ int print_pre_process_information(algorithm_type algorithm, int quantum, char *f
     printf("Quantum      : %*d\n", 2, quantum);
     printf("Sch. File    : %s\n", filename);
     printf("-------------------------------\n");
-    
-    return 0;
 }
 
-int print_process_information(int num_processes, cpu_process **processes){
+void print_process_information(int num_processes, cpu_process **processes){
     int i;
     /* Arrival order */
     printf("Arrival Order: ");
@@ -126,11 +124,9 @@ int print_process_information(int num_processes, cpu_process **processes){
     printf("-------------------------------\n");
     printf("Running...\n");
     printf("-------------------------------\n");
-    
-    return 0;
 }
 
-int simulate_fcfs(int num_processes, cpu_process **processes){
+void simulate_fcfs(int num_processes, cpu_process **processes){
     int wait_time = 0;
     int turnaround_time = 0;
     int total_wait_time = 0;
@@ -152,7 +148,6 @@ int simulate_fcfs(int num_processes, cpu_process **processes){
     printf("Avg. Waiting Time    : %*.02lf\n", 2, ((double)total_wait_time / num_processes));
     printf("Avg. Turnaround Time : %*.02lf\n", 2, ((double)total_turnaround_time / num_processes));
     printf("-------------------------------\n");
-    return 0;
 }
 
 int simulate_sjf(int num_processes, cpu_process **processes){
