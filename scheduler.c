@@ -27,6 +27,7 @@ int main(int argc, char * argv[]) {
     ret = parse_command_line_arguments(argc, argv, filename, &algorithm, &quantum);
     if(ret == -1){
         fprintf(stderr, "Error: Command line arguments were not valid!\n");
+        print_usage();
         exit(-1);        
     }
     
@@ -126,6 +127,10 @@ void print_process_information(int num_processes, cpu_process **processes){
     printf("-------------------------------\n");
 }
 
+void print_usage(){
+    printf("Usage : ./scheduler -s <algorithm-number> <filename> -q <quantum>\n");
+}
+
 void simulate_fcfs(int num_processes, cpu_process **processes){
     int wait_time = 0;
     int turnaround_time = 0;
@@ -151,16 +156,19 @@ void simulate_fcfs(int num_processes, cpu_process **processes){
 }
 
 int simulate_sjf(int num_processes, cpu_process **processes){
-    
+    // TODO
+    printf("Not yet implemented...\n");    
     return 0;
 }
 
 int simulate_priority(int num_processes, cpu_process **processes){
-    
+    // TODO
+    printf("Not yet implemented...\n");
     return 0;
 }
 
 int simulate_rr(int num_processes, cpu_process **processes, int quantum){
-    
+    // TODO
+    printf("Not yet implemented...\n");
     return 0;
 }

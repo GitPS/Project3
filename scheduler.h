@@ -35,9 +35,14 @@ void print_pre_process_information(algorithm_type algorithm, int quantum, char *
  * Print process information including arrival order, process identifier, 
  * CPU burst length, and priority.
  *   num_processes : Number of processes that were read in from file
- *   processes : Array containing the CPU processes 
+ *   processes : Array containing the CPU processes
  */
 void print_process_information(int num_processes, cpu_process **processes);
+
+/*
+ * Print usage information for execution of program.
+ */
+void print_usage();
 
 /*
  * Simulates the use of a First Come, First Served scheduling algorithm.
