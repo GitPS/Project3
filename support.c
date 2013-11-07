@@ -150,7 +150,11 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
                         if(is_valid_int(str_ptr) != 0){
                             return -1;
                         }
-                        (*processes)[i].burst_length = strtol(str_ptr, NULL, 10);
+                        int temp = strtol(str_ptr, NULL, 10);
+                        (*processes)[i].burst_length = temp;
+                        /* Set the value of cpu_time_remaining for use in R-R simulation */
+                        (*processes)[i].cpu_time_remaining = temp;
+                        temp = 0;
                         break;
                     case 2:
                         /* Check for valid integer before we call strtol()*/

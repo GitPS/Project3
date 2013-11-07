@@ -45,6 +45,8 @@ struct cpu_process{
     int identifier;
     int burst_length;
     int priority;
+    /* Only used for R-R */
+    int cpu_time_remaining;
 };
 typedef struct cpu_process cpu_process;
 
