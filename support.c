@@ -193,20 +193,4 @@ int is_valid_int(char *str){
     return 0;
 }
 
-int compare_priority(const void *p1, const void *p2){
-    const struct cpu_process *elem1 = p1;
-    const struct cpu_process *elem2 = p2;
-    if(elem1->priority > elem2->priority) return 1;
-    if(elem1->priority < elem2->priority) return -1;
-    return 0;
-}
-
-int compare_burst_length(const void *p1, const void *p2){
-    const struct cpu_process *elem1 = p1;
-    const struct cpu_process *elem2 = p2;
-    if(elem1->burst_length > elem2->burst_length) return 1;
-    if(elem1->burst_length < elem2->burst_length) return -1;
-    return 0;
-}
-
 
