@@ -83,4 +83,22 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
  *
  */
 int is_valid_int(char *str);
+
+/*
+ * Compares two strcutures based on the priority of the 
+ * process represnted by that structure.
+ * Returns 1 if p1 has a higher priority,
+ *        -1 if p2 has a higher priority,
+ *         0 if p1 and p2 are equal. 
+ */
+int compare_priority(const void *p1, const void *p2);
+
+/*
+ * Compares two strcutures based on the burst length of the 
+ * process represnted by that structure.
+ * Returns 1 if p1 has a longer burst length,
+ *        -1 if p2 has a longer burst length,
+ *         0 if p1 and p2 are equal. 
+ */
+int compare_burst_length(const void *p1, const void *p2);
 #endif

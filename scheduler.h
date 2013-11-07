@@ -45,34 +45,18 @@ void print_process_information(int num_processes, cpu_process **processes);
 void print_usage();
 
 /*
- * Simulates the use of a First Come, First Served scheduling algorithm.
+ * Simulates the use of scheduling algorithm with no quantum.
  *   num_processes : Number of processes that were read in from file
  *   processes : Array containing the CPU processes 
  */
-void simulate_fcfs(int num_processes, cpu_process **processes);
+void simulate_no_quantum(int num_processes, cpu_process **processes);
 
 /*
- * Simulates the use of a Shortest Job First scheduling algorithm.
+ * Simulates the use of scheduling algorithm with a quantum.
  *   num_processes : Number of processes that were read in from file
- *   processes : Array containing the CPU processes 
+ *   processes : Array containing the CPU processes
+ *   quantum : Value of the quantum  
  */
-int simulate_sjf(int num_processes, cpu_process **processes);
-
-/*
- * Simulates the use of a Priority scheduling algorithm.
- *   num_processes : Number of processes that were read in from file
- *   processes : Array containing the CPU processes 
- * Returns 0 on success
- */
-int simulate_priority(int num_processes, cpu_process **processes);
-
-/*
- * Simulates the use of a Round-Robin scheduling algorithm.
- *   num_processes : Number of processes that were read in from file
- *   processes : Array containing the CPU processes 
- *   quantum : Quantum to use
- * Returns 0 on success
- */
-int simulate_rr(int num_processes, cpu_process **processes, int quantum);
+void simulate_with_quantum(int num_processes, cpu_process **processes, int quantum);
 
 #endif

@@ -47,16 +47,19 @@ int main(int argc, char * argv[]) {
     /* Simulate scheduling of selected algorithm */
     switch(algorithm){
         case FCFS:
-            simulate_fcfs(num_processes, &processes);           
+            simulate_no_quantum(num_processes, &processes);           
             break;
         case SJF:
-            simulate_sjf(num_processes, &processes);
+            qsort(processes, num_processes, sizeof(cpu_process), compare_burst_length);
+            simulate_no_quantum(num_processes, &processes);
             break;
         case PRIORITY:
-            simulate_priority(num_processes, &processes);
+            /* Sort the processes array by priority */
+            qsort(processes, num_processes, sizeof(cpu_process), compare_priority);
+            simulate_no_quantum(num_processes, &processes);
             break;
         case RR:
-            simulate_rr(num_processes, &processes, quantum);
+            simulate_with_quantum(num_processes, &processes, quantum);
             break;
         case NONE:
             break;
@@ -131,7 +134,7 @@ void print_usage(){
     printf("Usage : ./scheduler -s <algorithm-number> <filename> -q <quantum>\n");
 }
 
-void simulate_fcfs(int num_processes, cpu_process **processes){
+void simulate_no_quantum(int num_processes, cpu_process **processes){
     int wait_time = 0;
     int turnaround_time = 0;
     int total_wait_time = 0;
@@ -155,20 +158,7 @@ void simulate_fcfs(int num_processes, cpu_process **processes){
     printf("-------------------------------\n");
 }
 
-int simulate_sjf(int num_processes, cpu_process **processes){
-    // TODO
-    printf("Not yet implemented...\n");    
-    return 0;
-}
-
-int simulate_priority(int num_processes, cpu_process **processes){
+void simulate_with_quantum(int num_processes, cpu_process **processes, int quantum){
     // TODO
     printf("Not yet implemented...\n");
-    return 0;
-}
-
-int simulate_rr(int num_processes, cpu_process **processes, int quantum){
-    // TODO
-    printf("Not yet implemented...\n");
-    return 0;
 }
