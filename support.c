@@ -175,16 +175,16 @@ int is_valid_int(char *str){
     int i = 0;
 
     /* Check for leading spaces */
-    if(isspace(str[0])){
+    if(isspace((unsigned char)str[0])){
         i = 1;
-        while(isspace(str[i])){
+        while(isspace((unsigned char)str[i])){
             i++;
         }
     }
 
     /* At this point we have verified that the only remaning characters should be digits if this is an integer. */
     for(i = i; i < length; i++){
-        if(!isdigit(str[i])){
+        if(!isdigit((unsigned char)str[i])){
             /* Is not an integer */
             return -1;          
         }
