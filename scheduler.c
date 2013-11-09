@@ -155,19 +155,19 @@ void simulate_fcfs(int num_processes, cpu_process **processes){
     printf("-------------------------------\n");
 }
 
-int simulate_sjf(int num_processes, cpu_process **processes){
-    // TODO
-    printf("Not yet implemented...\n");    
-    return 0;
-}
-
-int simulate_priority(int num_processes, cpu_process **processes){
+void simulate_sjf(int num_processes, cpu_process **processes){
     // TODO
     printf("Not yet implemented...\n");
     return 0;
 }
 
-int simulate_rr(int num_processes, cpu_process **processes, int quantum){
+void simulate_priority(int num_processes, cpu_process **processes){
+    // TODO
+    printf("Not yet implemented...\n");
+    return 0;
+}
+
+void simulate_rr(int num_processes, cpu_process **processes, int quantum){
     // TODO
     printf("Not yet implemented...\n");
     return 0;
