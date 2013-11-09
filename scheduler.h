@@ -62,7 +62,6 @@ void simulate_sjf(int num_processes, cpu_process **processes);
  * Simulates the use of a Priority scheduling algorithm.
  *   num_processes : Number of processes that were read in from file
  *   processes : Array containing the CPU processes 
- * Returns 0 on success
  */
 void simulate_priority(int num_processes, cpu_process **processes);
 
@@ -71,7 +70,6 @@ void simulate_priority(int num_processes, cpu_process **processes);
  *   num_processes : Number of processes that were read in from file
  *   processes : Array containing the CPU processes 
  *   quantum : Quantum to use
- * Returns 0 on success
  */
 void simulate_rr(int num_processes, cpu_process **processes, int quantum);
 
