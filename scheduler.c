@@ -156,8 +156,60 @@ void simulate_fcfs(int num_processes, cpu_process **processes){
 }
 
 void simulate_sjf(int num_processes, cpu_process **processes){
-    // TODO
-    printf("Not yet implemented...\n");
+    int wait_time = 0;
+    int turnaround_time = 0;
+    int total_wait_time = 0;
+    int total_turnaround_time = 0;
+    int i, j;
+	int shortest = 0;
+    
+	for(i = 0; i < num_processes; i++){
+		/* Initialize shortest to a candidate value */
+		for(j = 0; j < num_processes; j++){
+			if((*processes)[j].waiting == -1){
+				shortest = j;
+			}
+		}
+		/* Determine shortest remaining job */
+		for(j = 0; j < num_processes; j++){
+			if((*processes)[j].waiting == -1 && (*processes)[j].burst_length < (*processes)[shortest].burst_length){
+				shortest = j;
+			}
+		}
+		
+		/* we now have the shortest remining job, set waiting and turnaround times here!!! */
+		
+		
+		wait_time = turnaround_time;
+		turnaround_time += (*processes)[shortest].burst_length;
+		
+		(*processes)[shortest].waiting = wait_time;
+		(*processes)[shortest].turnaround = turnaround_time;
+		
+		total_wait_time += wait_time;
+		total_turnaround_time += turnaround_time;
+	}
+	
+	
+	
+    for(i = 0; i < num_processes; i++){
+		//wait_time = turnaround_time;
+		//turnaround_time += (*processes)[shortest].burst_length;
+		printf("%*d      ", 2, (*processes)[i].identifier);
+		printf("%*d      ", 2, (*processes)[i].burst_length);
+		printf("%*d      ", 2, (*processes)[i].priority);
+		printf("%*d      ", 2, (*processes)[i].waiting);
+		printf("%*d      \n", 2, (*processes)[i].turnaround);
+		/* Increment totals for averages */
+		//total_wait_time += wait_time;
+		//total_turnaround_time += turnaround_time;
+	}
+	
+	
+
+    printf("Avg. Waiting Time    : %*.02lf\n", 2, ((double)total_wait_time / num_processes));
+    printf("Avg. Turnaround Time : %*.02lf\n", 2, ((double)total_turnaround_time / num_processes));
+    printf("-------------------------------\n");
 }
 
 void simulate_priority(int num_processes, cpu_process **processes){

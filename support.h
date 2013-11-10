@@ -45,6 +45,8 @@ struct cpu_process{
     int identifier;
     int burst_length;
     int priority;
+	int waiting;
+	int turnaround;
 };
 typedef struct cpu_process cpu_process;
 
