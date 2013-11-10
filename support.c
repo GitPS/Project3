@@ -162,13 +162,13 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
                     default:
                         break;
                 }
-				/* Initialize these for later use */
-				(*processes)[i].waiting = -1;
-				(*processes)[i].turnaround = -1;
                 j++;
             }
         }
         i++;
+		/* Initialize these for later use */
+		(*processes)[i].waiting = -1;
+		(*processes)[i].turnaround = -1;
     }
     return 0;
 }

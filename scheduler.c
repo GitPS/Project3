@@ -165,7 +165,7 @@ void simulate_sjf(int num_processes, cpu_process **processes){
     
 	for(i = 0; i < num_processes; i++){
 		/* Initialize shortest to a candidate value */
-		for(j = 0; j < num_processes; j++){
+		for(j = num_processes; j >= 0; j--){
 			if((*processes)[j].waiting == -1){
 				shortest = j;
 			}
@@ -177,9 +177,6 @@ void simulate_sjf(int num_processes, cpu_process **processes){
 			}
 		}
 		
-		/* we now have the shortest remining job, set waiting and turnaround times here!!! */
-		
-		
 		wait_time = turnaround_time;
 		turnaround_time += (*processes)[shortest].burst_length;
 		
@@ -189,9 +186,7 @@ void simulate_sjf(int num_processes, cpu_process **processes){
 		total_wait_time += wait_time;
 		total_turnaround_time += turnaround_time;
 	}
-	
-	
-	
+
     for(i = 0; i < num_processes; i++){
 		//wait_time = turnaround_time;
 		//turnaround_time += (*processes)[shortest].burst_length;
@@ -204,8 +199,6 @@ void simulate_sjf(int num_processes, cpu_process **processes){
 		//total_wait_time += wait_time;
 		//total_turnaround_time += turnaround_time;
 	}
-	
-	
 
     printf("Avg. Waiting Time    : %*.02lf\n", 2, ((double)total_wait_time / num_processes));
     printf("Avg. Turnaround Time : %*.02lf\n", 2, ((double)total_turnaround_time / num_processes));
@@ -213,8 +206,53 @@ void simulate_sjf(int num_processes, cpu_process **processes){
 }
 
 void simulate_priority(int num_processes, cpu_process **processes){
-    // TODO
-    printf("Not yet implemented...\n");
+    int wait_time = 0;
+    int turnaround_time = 0;
+    int total_wait_time = 0;
+    int total_turnaround_time = 0;
+    int i, j;
+	int priority = 0;
+    
+	for(i = 0; i < num_processes; i++){
+		/* Initialize highest-priority to a candidate value */
+		for(j = num_processes; j >= 0; j--){
+			if((*processes)[j].waiting == -1){
+				priority = j;
+			}
+		}
+		/* Determine highest-priority remaining job */
+		for(j = 0; j < num_processes; j++){
+			if((*processes)[j].waiting == -1 && (*processes)[j].priority < (*processes)[priority].priority){
+				priority = j;
+			}
+		}
+		
+		wait_time = turnaround_time;
+		turnaround_time += (*processes)[priority].burst_length;
+		
+		(*processes)[priority].waiting = wait_time;
+		(*processes)[priority].turnaround = turnaround_time;
+		
+		total_wait_time += wait_time;
+		total_turnaround_time += turnaround_time;
+	}
+
+    for(i = 0; i < num_processes; i++){
+		//wait_time = turnaround_time;
+		//turnaround_time += (*processes)[priority].burst_length;
+		printf("%*d      ", 2, (*processes)[i].identifier);
+		printf("%*d      ", 2, (*processes)[i].burst_length);
+		printf("%*d      ", 2, (*processes)[i].priority);
+		printf("%*d      ", 2, (*processes)[i].waiting);
+		printf("%*d      \n", 2, (*processes)[i].turnaround);
+		/* Increment totals for averages */
+		//total_wait_time += wait_time;
+		//total_turnaround_time += turnaround_time;
+	}
+
+    printf("Avg. Waiting Time    : %*.02lf\n", 2, ((double)total_wait_time / num_processes));
+    printf("Avg. Turnaround Time : %*.02lf\n", 2, ((double)total_turnaround_time / num_processes));
+    printf("-------------------------------\n");
 }
 
 void simulate_rr(int num_processes, cpu_process **processes, int quantum){
