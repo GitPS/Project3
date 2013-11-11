@@ -256,6 +256,47 @@ void simulate_priority(int num_processes, cpu_process **processes){
 }
 
 void simulate_rr(int num_processes, cpu_process **processes, int quantum){
-    // TODO
-    printf("Not yet implemented...\n");
+    int wait_time = 0;
+    int turnaround_time = 0;
+    int total_wait_time = 0;
+    int total_turnaround_time = 0;
+	int max_subprocesses;
+	int total_runtime = 0;
+	int i;
+	
+	/* Determine max number of subprocesses possible */
+	for(i = 0; i < num_processes; i++){
+		total_runtime += (*processes)[i].burst_length;
+	}
+	max_subprocesses = (total_runtime / quantum) + 1;
+	
+	/* Make enough room in processes for all possible subprocesses */
+	/* PROBLEM AREA */
+	processes = (cpu_process*) realloc(processes, sizeof(cpu_process) * max_subprocesses);
+	
+	for(i = 0; i < num_processes - 1; i++){
+		if((*processes)[i].burst_length > quantum){
+			
+			(*processes)[num_processes].identifier = (*processes)[i].identifier
+			(*processes)[num_processes].burst_length = (*processes)[i].burst_length - quantum;
+			(*processes)[num_processes].priority = (*processes)[i].priority
+			
+			(*processes)[i].burst_length = quantum;
+			
+			num_processes++;
+		}
+		
+		wait_time = turnaround_time;
+		turnaround_time += (*processes)[i].burst_length;
+		
+		(*processes)[i].waiting = wait_time;
+		(*processes)[i].turnaround = turnaround_time;
+		
+		total_wait_time += wait_time;
+		total_turnaround_time += turnaround_time;
+	}
+	
+	// Here we'll have to step through the whole array once more to get the Average
+	// Wait/Turnaround times, because it's much more involved with Round Robin; not a simple average
+	
 }
