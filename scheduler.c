@@ -192,16 +192,11 @@ void simulate_sjf(int num_processes, cpu_process **processes){
 	}
 
     for(i = 0; i < num_processes; i++){
-		//wait_time = turnaround_time;
-		//turnaround_time += (*processes)[shortest].burst_length;
 		printf("%*d      ", 2, (*processes)[i].identifier);
 		printf("%*d      ", 2, (*processes)[i].burst_length);
 		printf("%*d      ", 2, (*processes)[i].priority);
 		printf("%*d      ", 2, (*processes)[i].waiting);
 		printf("%*d      \n", 2, (*processes)[i].turnaround);
-		/* Increment totals for averages */
-		//total_wait_time += wait_time;
-		//total_turnaround_time += turnaround_time;
 	}
 
     printf("Avg. Waiting Time    : %*.02lf\n", 2, ((double)total_wait_time / num_processes));
@@ -242,16 +237,11 @@ void simulate_priority(int num_processes, cpu_process **processes){
 	}
 
     for(i = 0; i < num_processes; i++){
-		//wait_time = turnaround_time;
-		//turnaround_time += (*processes)[priority].burst_length;
 		printf("%*d      ", 2, (*processes)[i].identifier);
 		printf("%*d      ", 2, (*processes)[i].burst_length);
 		printf("%*d      ", 2, (*processes)[i].priority);
 		printf("%*d      ", 2, (*processes)[i].waiting);
 		printf("%*d      \n", 2, (*processes)[i].turnaround);
-		/* Increment totals for averages */
-		//total_wait_time += wait_time;
-		//total_turnaround_time += turnaround_time;
 	}
 
     printf("Avg. Waiting Time    : %*.02lf\n", 2, ((double)total_wait_time / num_processes));
@@ -262,28 +252,37 @@ void simulate_priority(int num_processes, cpu_process **processes){
 void simulate_rr(int num_processes, cpu_process **processes, int quantum){
     int wait_time = 0;
     int turnaround_time = 0;
-    int total_wait_time = 0;
-    int total_turnaround_time = 0;
+	int total_wait_time = 0;
+	int total_turnaround_time = 0;
 	int max_subprocesses;
 	int total_runtime = 0;
-	int i;
+	int i, j;
 	
-	/* Determine max number of subprocesses possible */
+	int turnaround_times[num_processes];
+	int wait_times[num_processes];
+	int subprocess_counts[num_processes];
+	int unique_processes = num_processes;
+	
+	/* Determine max number of subprocesses possible, initialize stat variables */
 	for(i = 0; i < num_processes; i++){
 		total_runtime += (*processes)[i].burst_length;
+		/* Initialize stats */
+		turnaround_times[i] = 0;
+		wait_times[i] = 0;
+		subprocess_counts[i] = 0;
 	}
 	max_subprocesses = (total_runtime / quantum) + 1;
 	
 	/* Make enough room in processes for all possible subprocesses */
-	/* PROBLEM AREA */
     (*processes) = (cpu_process *)realloc((*processes), (sizeof(cpu_process) * (max_subprocesses)));
     if( NULL == (*processes) ) {
         fprintf(stderr, "Error: Failed to allocate memory! Critical failure on %d!", __LINE__);
         exit(-1);
     }
 	
-	for(i = 0; i < num_processes - 1; i++){
-		if((*processes)[i].burst_length > quantum){
+	/* Create the Gantt Chart */
+	for(i = 0; i < num_processes; i++){
+		if((*processes)[i].burst_length > quantum && i != num_processes-1){
 			
 			(*processes)[num_processes].identifier = (*processes)[i].identifier;
 			(*processes)[num_processes].burst_length = (*processes)[i].burst_length - quantum;
@@ -299,12 +298,29 @@ void simulate_rr(int num_processes, cpu_process **processes, int quantum){
 		
 		(*processes)[i].waiting = wait_time;
 		(*processes)[i].turnaround = turnaround_time;
+	}
+
+	/* Calculate and print stats */
+	for(i = 0; i < unique_processes; i++){
+		for(j = 0; j < num_processes; j++){
+			if((*processes)[i].identifier == (*processes)[j].identifier){
+				/* We're examining a subprocess of the process we're interested in */
+				subprocess_counts[i]++;
+				turnaround_times[i] = (*processes)[j].turnaround;
+				wait_times[i] += (*processes)[j].waiting;
+			}
+		}
+		printf("%*d      ", 2, (*processes)[i].identifier);
+		printf("%*d      ", 2, (*processes)[i].burst_length);
+		printf("%*d      ", 2, (*processes)[i].priority);
+		printf("%*d      ", 2, wait_times[i]/subprocess_counts[i]);
+		printf("%*d      \n", 2, turnaround_times[i]);
 		
-		total_wait_time += wait_time;
-		total_turnaround_time += turnaround_time;
+		total_wait_time += wait_times[i]/subprocess_counts[i];
+		total_turnaround_time += turnaround_times[i];
 	}
 	
-	// Here we'll have to step through the whole array once more to get the Average
-	// Wait/Turnaround times, because it's much more involved with Round Robin; not a simple average
-	
+	printf("Avg. Waiting Time    : %*.02lf\n", 2, ((double)total_wait_time / unique_processes));
+    printf("Avg. Turnaround Time : %*.02lf\n", 2, ((double)total_turnaround_time / unique_processes));
+    printf("-------------------------------\n");
 }
