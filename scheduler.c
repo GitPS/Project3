@@ -269,8 +269,6 @@ void simulate_rr(int num_processes, cpu_process **processes, int quantum){
 		total_runtime += (*processes)[i].burst_length;
 	}
 	max_subprocesses = (total_runtime / quantum) + 1;
-    printf("Size of array = %lu\n", sizeof(*processes));
-    printf("New array size = %lu\n", sizeof(cpu_process) * (max_subprocesses));
 	
 	/* Make enough room in processes for all possible subprocesses */
 	/* PROBLEM AREA */
