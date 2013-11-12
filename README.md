@@ -16,7 +16,11 @@ To build this software, simply navigate to the directory containing the Makefile
 
 __Usage__
 
-To use this software, simply run the command ...
+To use this software, simply run the command `./scheduler` with a `-s` flag, followed by a single digit from one through four which selects the scheduling algorithm.  1 specifies "First-Come, First-Served", 2 specifies "Shortest Job First", 3 specifies "Priority", and 4 specifies "Round Robin".  If "Round Robin" is selected, then the user must also specify the desired quantum with a `-q` flag followed by the number.
+
+The user must also input the filename and path (if applicable) of a textfile where the first line states the number of processes which are to be scheduled and each of the remaining lines specifies an identifier, burst length, and priority for that process, delimited by a single space.
+
+Thus, a complete command for this program might look like `./scheduler -s 4 test1.txt -q 3` or `./scheduler -s 2 test2.txt`.  Note that the order of the flags does not matter and the quantum, if specified, will be ignored for all scheduling algorithms except Round Robin.  If the user does not specify a proper command, the process will remind the user of the proper syntax and terminate.
 
 __Test Cases__
 
