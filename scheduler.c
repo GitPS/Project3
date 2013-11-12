@@ -272,7 +272,7 @@ void simulate_rr(int num_processes, cpu_process **processes, int quantum){
 	
 	/* Make enough room in processes for all possible subprocesses */
 	/* PROBLEM AREA */
-	processes = (cpu_process*) realloc(processes, sizeof(cpu_process) * max_subprocesses);
+	*processes = (cpu_process*) realloc(*processes, sizeof(cpu_process) * max_subprocesses);
 	
 	for(i = 0; i < num_processes - 1; i++){
 		if((*processes)[i].burst_length > quantum){
