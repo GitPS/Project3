@@ -72,7 +72,11 @@ int main(int argc, char * argv[]) {
             /* .burst_length */
             processes->burst_length = 0;            
             /* .priority */
-            processes->priority = 0;            
+            processes->priority = 0;           
+            /* .waiting */
+            processes->waiting = 0;
+            /* .turnaround */
+            processes->turnaround = 0;
         }
         free(processes);
         processes = NULL;
