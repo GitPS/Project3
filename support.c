@@ -158,6 +158,9 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
                             return -1;
                         }
                         (*processes)[i].priority = strtol(str_ptr, NULL, 10);
+                        /* Initialize these for later use */
+                        (*processes)[i].waiting = -1;
+                        (*processes)[i].turnaround = -1;
                         break;
                     default:
                         break;
@@ -166,9 +169,6 @@ int parse_file_into_processes(char *filename, int *num_processes, cpu_process **
             }
         }
         i++;
-		/* Initialize these for later use */
-		(*processes)[i].waiting = -1;
-		(*processes)[i].turnaround = -1;
     }
     return 0;
 }

@@ -269,17 +269,23 @@ void simulate_rr(int num_processes, cpu_process **processes, int quantum){
 		total_runtime += (*processes)[i].burst_length;
 	}
 	max_subprocesses = (total_runtime / quantum) + 1;
+    printf("Size of array = %lu\n", sizeof(*processes));
+    printf("New array size = %lu\n", sizeof(cpu_process) * (max_subprocesses));
 	
 	/* Make enough room in processes for all possible subprocesses */
 	/* PROBLEM AREA */
-	*processes = (cpu_process*) realloc(*processes, sizeof(cpu_process) * max_subprocesses);
+    (*processes) = (cpu_process *)realloc((*processes), (sizeof(cpu_process) * (num_processes)));
+    if( NULL == (*processes) ) {
+        fprintf(stderr, "Error: Failed to allocate memory! Critical failure on %d!", __LINE__);
+        exit(-1);
+    }
 	
 	for(i = 0; i < num_processes - 1; i++){
 		if((*processes)[i].burst_length > quantum){
 			
-			(*processes)[num_processes].identifier = (*processes)[i].identifier
+			(*processes)[num_processes].identifier = (*processes)[i].identifier;
 			(*processes)[num_processes].burst_length = (*processes)[i].burst_length - quantum;
-			(*processes)[num_processes].priority = (*processes)[i].priority
+			(*processes)[num_processes].priority = (*processes)[i].priority;
 			
 			(*processes)[i].burst_length = quantum;
 			
