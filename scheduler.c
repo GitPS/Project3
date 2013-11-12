@@ -272,7 +272,7 @@ void simulate_rr(int num_processes, cpu_process **processes, int quantum){
 	
 	/* Make enough room in processes for all possible subprocesses */
 	/* PROBLEM AREA */
-    (*processes) = (cpu_process *)realloc((*processes), (sizeof(cpu_process) * (num_processes)));
+    (*processes) = (cpu_process *)realloc((*processes), (sizeof(cpu_process) * (max_subprocesses)));
     if( NULL == (*processes) ) {
         fprintf(stderr, "Error: Failed to allocate memory! Critical failure on %d!", __LINE__);
         exit(-1);
