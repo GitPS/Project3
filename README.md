@@ -20,7 +20,7 @@ To use this software, simply run the command `./scheduler` with a `-s` flag, fol
 
 The user must also input the filename and path (if applicable) of a textfile where the first line states the number of processes which are to be scheduled and each of the remaining lines specifies an identifier, burst length, and priority for that process, delimited by a single space.
 
-Thus, a complete command for this program might look like `./scheduler -s 4 test1.txt -q 3` or `./scheduler -s 2 test2.txt`.  Note that the order of the flags does not matter and the quantum, if specified, will be ignored for all scheduling algorithms except Round Robin.  If the user does not specify a proper command, the process will remind the user of the proper syntax and terminate.
+Thus, a complete command for this program might look like `./scheduler -s 4 tests/test1.txt -q 3` or `./scheduler -s 2 tests/test2.txt`.  Note that the order of the flags does not matter and the quantum, if specified, will be ignored for all scheduling algorithms except Round Robin.  If the user does not specify a proper command, the process will remind the user of the proper syntax and terminate.
 
 __Test Cases__
 
