@@ -38,7 +38,34 @@ __Test Cases__
 
 __Examples__
 
-TODO
+This example shows the output of `./scheduler -s 4 tests/test2.txt -q 3`.  Note how the output maintains the order of arrival, as is expected with the Round Robin scheduling algorithm.
+````
+$ ./scheduler -s 4 tests/test2.txt -q 3
+Scheduler    :  4 RR
+Quantum      :  3
+Sch. File    : tests/test2.txt
+-------------------------------
+Arrival Order: 9, 4, 1, 8, 5
+Process Information:
+ 9      10       1
+ 4      12       2
+ 1      14       3
+ 8      16       4
+ 5      18       5
+-------------------------------
+Running...
+-------------------------------
+ 9      10       1      22      46
+ 4      12       2      25      49
+ 1      14       3      34      60
+ 8      16       4      41      67
+ 5      18       5      44      70
+Avg. Waiting Time    : 33.20
+Avg. Turnaround Time : 58.40
+-------------------------------
+````
+
+
 
 __Known Bugs and Problem Areas__
 * No bugs or problem areas are known at this time.
