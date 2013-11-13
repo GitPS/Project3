@@ -40,7 +40,7 @@ __Examples__
 
 This example shows the output of `./scheduler -s 4 tests/test2.txt -q 3`.  Note how the output maintains the order of arrival.
 ````
-$ ./scheduler -s 4 tests/test2.txt -q 3
+shell$ ./scheduler -s 4 tests/test2.txt -q 3
 Scheduler    :  4 RR
 Quantum      :  3
 Sch. File    : tests/test2.txt
