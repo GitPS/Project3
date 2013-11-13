@@ -64,7 +64,7 @@ Avg. Waiting Time    : 33.20
 Avg. Turnaround Time : 58.40
 -------------------------------
 ````
-This following examples shows the output of `./scheduler tests/test7.txt -s 1`.  This output can quickly be checked for accuracy since each CPU burst length is 5 and there are a total of 10 processes.
+This following example shows the output of `./scheduler tests/test7.txt -s 1`.  This output can quickly be checked for accuracy since each CPU burst length is 5 and there are a total of 10 processes.
 ````
 shell3$ ./scheduler -s 1 tests/test7.txt
 Scheduler    :  1 FCFS
@@ -101,7 +101,7 @@ Avg. Turnaround Time : 27.50
 -------------------------------
 
 ````
-This following examples shows the output of `./scheduler tests/test7.txt -s 2`.  This output can quickly be checked for accuracy since each CPU burst length is 5 and there are a total of 10 processes.
+This following example shows the output of `./scheduler tests/test7.txt -s 2`.  This output can quickly be checked for accuracy since each CPU burst length is 5 and there are a total of 10 processes.
 ````
 shell$ ./scheduler -s 2 tests/test7.txt
 Scheduler    :  2 SJF
@@ -136,7 +136,7 @@ Running...
 Avg. Waiting Time    : 22.50
 Avg. Turnaround Time : 27.50
 ````
-This following examples shows the output of `./scheduler tests/test7.txt -s 3`.  This output can quickly be checked for accuracy since each CPU burst length is 5 and there are a total of 10 processes.
+This following example shows the output of `./scheduler tests/test7.txt -s 3`.  This output can quickly be checked for accuracy since each CPU burst length is 5 and there are a total of 10 processes.
 ````
 shell$ ./scheduler -s 3 tests/test7.txt
 Scheduler    :  3 PRIORITY
