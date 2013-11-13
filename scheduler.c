@@ -271,7 +271,9 @@ void simulate_rr(int num_processes, cpu_process **processes, int quantum){
 		wait_times[i] = 0;
 		subprocess_counts[i] = 0;
 	}
+	
 	max_subprocesses = (total_runtime / quantum) + 1;
+    max_subprocesses += num_processes;
 	
 	/* Make enough room in processes for all possible subprocesses */
     (*processes) = (cpu_process *)realloc((*processes), (sizeof(cpu_process) * (max_subprocesses)));
