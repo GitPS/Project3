@@ -73,4 +73,21 @@ void simulate_priority(int num_processes, cpu_process **processes);
  */
 void simulate_rr(int num_processes, cpu_process **processes, int quantum);
 
+/*
+ * Prints a line containing process attributes and stats
+ *   identifier : The process's unique identifier
+ *   burst_length : The processes's cpu burst length
+ *   priority : The processes's priority level
+ *   waiting : The wait time of the process
+ *   turnaround : The turnaround time of the process
+ */
+void print_process_stats(int identifier, int burst_length, int priority, int waiting, int turnaround);
+
+/*
+ * Prints the average waiting/turnaround times and the footer
+ *   waiting : The group's average waiting time
+ *   turnaround : The group's average turnaround time
+ */
+void print_averages_footer(double waiting, double turnaround);
+
 #endif
