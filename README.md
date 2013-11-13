@@ -8,7 +8,7 @@ Ryan Gittins and Phillip Sime
 
 __Summary__
 
-This software ...
+This software simulates four process scheduling algorithms including "First-Come, First-Served", "Shortest Job First", "Priority", and "Round Robin".  The user supplies a textfile in which the number of processes to be simulated is specified as well as details for each of those processes, namely an identifier, burst length, and priority level.  Via a command-line interface the user selects one of the four algorithms, a filename, and (if they chose Round Robin) a quantum.  The program then displays information regarding the chosen algorithm, quantum, filename, file contents, scheduling information, and average waiting/turnaround times before exiting.
 
 __Build__
 
