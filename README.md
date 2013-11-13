@@ -64,7 +64,43 @@ Avg. Waiting Time    : 33.20
 Avg. Turnaround Time : 58.40
 -------------------------------
 ````
+This example shows the output of `./scheduler tests/test2.txt -s 1`.  This output can quickly be checked for accuracy since each CPU burst length is 5 and there are a total of 10 processes.  You can see that the wait time starts at 0 and increments by 5 for each process thereafter.  You can also see that the turnaround time starts at 5 and increments by 5 for each process thereafter.  
+````
+shell3$ ./scheduler -s 1 tests/test7.txt
+Scheduler    :  1 FCFS
+Quantum      :  0
+Sch. File    : tests/test7.txt
+-------------------------------
+Arrival Order: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+Process Information: 
+ 1       5      10
+ 2       5       9
+ 3       5       8
+ 4       5       7
+ 5       5       6
+ 6       5       5
+ 7       5       4
+ 8       5       3
+ 9       5       2
+10       5       1
+-------------------------------
+Running...
+-------------------------------
+ 1       5      10       0       5
+ 2       5       9       5      10
+ 3       5       8      10      15
+ 4       5       7      15      20
+ 5       5       6      20      25
+ 6       5       5      25      30
+ 7       5       4      30      35
+ 8       5       3      35      40
+ 9       5       2      40      45
+10       5       1      45      50
+Avg. Waiting Time    : 22.50
+Avg. Turnaround Time : 27.50
+-------------------------------
 
+````
 __Known Bugs and Problem Areas__
 * No bugs or problem areas are known at this time.
 
