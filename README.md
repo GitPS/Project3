@@ -38,7 +38,7 @@ __Test Cases__
 
 __Examples__
 
-This example shows the output of `./scheduler -s 4 tests/test2.txt -q 3`.  Note how the output maintains the order of arrival, as is expected with the Round Robin scheduling algorithm.
+This example shows the output of `./scheduler -s 4 tests/test2.txt -q 3`.  Note how the output maintains the order of arrival.
 ````
 $ ./scheduler -s 4 tests/test2.txt -q 3
 Scheduler    :  4 RR
@@ -64,8 +64,6 @@ Avg. Waiting Time    : 33.20
 Avg. Turnaround Time : 58.40
 -------------------------------
 ````
-
-
 
 __Known Bugs and Problem Areas__
 * No bugs or problem areas are known at this time.
