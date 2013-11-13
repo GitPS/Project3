@@ -261,6 +261,7 @@ void simulate_rr(int num_processes, cpu_process **processes, int quantum){
 	int turnaround_times[num_processes];
 	int wait_times[num_processes];
 	int subprocess_counts[num_processes];
+	int initial_burst_lengths[num_processes];
 	int unique_processes = num_processes;
 	
 	/* Determine max number of subprocesses possible, initialize stat variables */
@@ -270,6 +271,7 @@ void simulate_rr(int num_processes, cpu_process **processes, int quantum){
 		turnaround_times[i] = 0;
 		wait_times[i] = 0;
 		subprocess_counts[i] = 0;
+		initial_burst_lengths[i] = (*processes)[i].burst_length;
 	}
 	max_subprocesses = (total_runtime / quantum) + 1;
 	
@@ -311,7 +313,7 @@ void simulate_rr(int num_processes, cpu_process **processes, int quantum){
 			}
 		}
 		printf("%*d      ", 2, (*processes)[i].identifier);
-		printf("%*d      ", 2, (*processes)[i].burst_length);
+		printf("%*d      ", 2, initial_burst_lengths[i]);
 		printf("%*d      ", 2, (*processes)[i].priority);
 		printf("%*d      ", 2, wait_times[i]/subprocess_counts[i]);
 		printf("%*d      \n", 2, turnaround_times[i]);
