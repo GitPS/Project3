@@ -24,7 +24,17 @@ Thus, a complete command for this program might look like `./scheduler -s 4 test
 
 __Test Cases__
 
-TODO
+`test1.txt`  This test is identical to the one given as an example in the Project Overview.  Its contents appear on page two and two examples of its use appear on page four.  This is a basic sanity check to ensure the results produced by the program are identical to the results on page four.
+
+`test2.txt`  This test was built in order to demonstrate that Round Robin can handle many rounds without issue.  It is intended to be run with a low quantum (~3) so all processes are split across several rounds.  This test also demonstrates that the process identifiers do not need to be in any way consecutive or ordered.
+
+`test3.txt`  This test contains 100 processes and was built as a stress test.  All tests have the same burst lengths and priorities, so this test also demonstrates the program's maintenance of arrival order in the event of a tie.
+
+`test4.txt`  This test demonstrates a graceful failure and controlled termination of the program the in event of execution on a malformed test.  This test contains an alphabetic character where a digit is expected.
+
+`test5.txt`  This test demonstrates an attempt at handling malformed data.  In the event of a missing value, the program assigns a default value of zero.  In this test, one of the processes is missing a priority level, and the program handles it as it would handle a process with priority zero.
+
+`test6.txt`  This test demonstrates another successful attempt at handling malformed data.  If there is extra data beyond the required values on any given line, the program simply ignores it and continues reading the rest of the file without any problems.
 
 __Examples__
 
